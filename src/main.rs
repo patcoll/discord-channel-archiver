@@ -71,7 +71,8 @@ async fn main() {
 
     tokio::spawn(async { html::prebuild_regexes() });
 
-    let intents = GatewayIntents::all();
+    // Presence is privileged and unused; requesting it fails login when the portal switch is off.
+    let intents = GatewayIntents::all() - GatewayIntents::GUILD_PRESENCES;
 
     // Create a new instance of the Client, logging in as a bot. This will
     // automatically prepend your bot token with "Bot ", which is a requirement
